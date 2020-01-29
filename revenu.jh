@@ -1,0 +1,335 @@
+/**
+ * IntituleRevenu entity.
+ * @author sanda
+ */
+entity IntituleRevenu {
+	intitule String
+    type Integer
+}
+/**
+ * JustificatifRevenu entity.
+ * @author sanda
+ *     relation
+ *     - OneToMany avec IntituleRevenu
+ *     - ManyToOne avec Revenu
+ */
+entity JustificatifRevenu {
+	titre String
+    justificatif String
+}
+/**
+ * Revenu entity.
+ * @author sanda
+ *     relation
+ */
+entity Revenu {
+	titreDeclaration String
+    periodeDebut Date
+    periodeFin Date
+	premevementLiberatoire Boolean
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity OptionImposition {
+    optionImposition String
+}
+/**
+ * BeneficeReel entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity BeneficeReel {
+	revenuNetReel Double
+    montantDeficit Double
+}
+/**
+ * CapitauxMobilier entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity CapitauxMobilier {
+	montantBrut Double
+    fraisDeductible Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity ChargeDeductible {
+	montantChargeDeductible Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity DeficitFoncier {
+	dateDeficit Date
+    montantDeficit Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity ImputationDeficit {
+	anneeImputation Date
+    montantImpute Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity DetailRevenuFoncier {
+    montantRevenu Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity RegimeForfait {
+    montantRevenuNet Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity RevenuSourceEtrangere {
+	natureRevenu String
+    montantPercu Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity TraitementSalaire {
+	intituleTraitement String
+    revenuNet Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity TrainDeVieDomestique {
+    salaire Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *     relation
+     - OneToMany avec IntituleRevenu
+ */
+entity TrainDeVieEngin {
+	intitule String
+    puissanceEngin Double
+}
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *    relation
+     - OneToMany avec IntituleRevenu
+ */
+entity TrainDeVieResidence {
+} 
+/**
+ * ChargeDeductible entity.
+ * @author sanda
+ *    relation
+     - OneToMany avec IntituleRevenu
+ */
+entity PlusValue {
+	montantBrut Double
+	reduction Double
+	abattement Double
+} 
+/**
+ * FoyerFiscal entity.
+ * @author sanda
+ *  C'est le regroupement qui permet de calculer le revenu imposable
+ *  et determiner la déductibilité liée aux charges
+ *  	- Determiner un algorithme permettant de référencer tous les foyers
+ *  fiscaux
+ *  RELATION
+ * 	- OneToMany avec contribuable pour le chef de famille
+ */
+entity FoyerFiscal{
+	refFoyer String
+}
+/**
+ * CompositionFoyerFiscal entity.
+ * @author sanda
+ *  C'est le regroupement des personnes qui compose le foyer
+ *  fiscal
+ *  relation
+ *  	- OneToMany avec Contribuable
+ * 	 - OneToMany avec FoyerFiscal
+
+ */
+entity CompositionFoyerFiscal{
+	lien LienParente
+	degreParente Long
+}
+enum LienParente {
+	PERE, FILS, ONCLE, GRAND_PERE, FILEUIL, TUTEUR, PARRAIN, FRERE,COUSIN
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToOne {
+	Contribuable to User
+}
+relationship OneToOne {
+	Contribuable to FoyerFiscal
+}
+relationship OneToMany {
+	FoyerFiscal to Contribuable
+}
+relationship OneToMany {
+	Revenu to TrainDeVieDomestique
+}
+relationship OneToMany {
+	Revenu to TrainDeVieEngin
+}
+relationship OneToMany {
+	Revenu to TrainDeVieResidence
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to OptionImposition 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to JustificatifRevenu 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to BeneficeReel 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to CapitauxMobilier 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to ChargeDeductible 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to DeficitFoncier 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to ImputationDeficit 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to OptionImposition 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to DetailRevenuFoncier 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to RegimeForfait 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to RevenuSourceEtrangere 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	Revenu to TraitementSalaire 
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	EnteteDeclaration to Revenu
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	IntituleRevenu to  BeneficeReel
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	IntituleRevenu to  CapitauxMobilier
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	IntituleRevenu to  ChargeDeductible
+}
+/**
+ * One to many relationship.
+ */
+relationship OneToMany {
+	IntituleRevenu to  PlusValue
+}
+relationship OneToMany {
+	Revenu to  CompositionFoyerFiscal
+}
+relationship OneToMany {
+	IntituleRevenu to  RegimeForfait
+}
+relationship OneToMany {
+	IntituleRevenu to  PlusValue
+}
+// Set pagination options
+paginate JustificatifRevenu, Revenu, OptionImposition, DeficitFoncier, ImputationDeficit, RevenuSourceEtrangere, TrainDeVieDomestique, TrainDeVieResidence  with infinite-scroll
+paginate CapitauxMobilier, BeneficeReel, ChargeDeductible, DetailRevenuFoncier, RegimeForfait, TraitementSalaire, TrainDeVieEngin, PlusValue with pagination
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+// Set service options to all except few
+service all with serviceImpl except IntituleRevenu, JustificatifRevenu
+// Set an angular suffix
+// angularSuffix * with mySuffix
